@@ -162,7 +162,59 @@ python app.py
 - Automatic deactivation playbooks with approval gates
 - Cost anomaly detection and confidence scoring
 - Scheduled executive summaries by tenant/portfolio
+---
 
+## Proof & Current Status
+
+### Current Maturity
+RunwayOS is in **working prototype / operator-pilot** stage with core workflow and security primitives implemented for multi-tenant webhook-driven seat recovery analysis.
+
+### What Is Implemented
+- Multi-state asset lifecycle (`ACTIVE` → `PENDING_REMOVAL` → `DEACTIVATED`)
+- Webhook signature verification path with timing-safe comparisons
+- Replay-window timestamp enforcement
+- Finance-oriented CSV export flow
+- Mobile-first operator UI patterns for review/confirmation actions
+
+### Demo Scope
+A guided sandbox demonstration can show:
+1. Intake of an offboarding-style webhook event
+2. Transition to `PENDING_REMOVAL` with projection freeze behavior
+3. Admin confirmation flow to `DEACTIVATED`
+4. Post-confirmation runway impact artifact export (CSV)
+
+### Current Limitations
+- Some provider integrations may be partial or mocked depending on environment setup
+- Production-grade observability and alert routing should be hardened per deployment target
+- Automated end-to-end reconciliation coverage may vary by tenant/provider mix
+
+### Security Posture Notes
+RunwayOS applies application-level controls for webhook authenticity and workflow integrity.  
+Before production use, pair with:
+- Managed secret storage and scheduled key rotation
+- Network controls (WAF/rate limits/IP policy as needed)
+- Centralized audit logging and incident response runbooks
+- Environment-specific penetration and compliance review
+
+### Validation Roadmap (Next 30–60 Days)
+- Expand direct provider deprovisioning/reconciliation connectors
+- Add policy-based approval gates for automated removal actions
+- Strengthen tenant-level audit and anomaly reporting
+- Publish repeatable test fixtures and integration verification matrix
+
+---
+
+## Evaluation / Pilot Access
+
+If you are a fractional CFO team, operator network, or acquirer evaluating this asset, open an issue in this repository with:
+
+- your use case (portfolio ops, internal finance, managed services)
+- preferred integration targets (Slack, Google Workspace, GitHub, Jira, etc.)
+- desired pilot timeline
+
+A short guided sandbox session can be coordinated from there.
+
+---
 ---
 
 ## License
